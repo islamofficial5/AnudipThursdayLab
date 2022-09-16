@@ -1,0 +1,226 @@
+mysql> desc Employee;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| Employee_id | int         | YES  |     | NULL    |       |
+| Last_name   | varchar(25) | YES  |     | NULL    |       |
+| Job_id      | varchar(10) | YES  |     | NULL    |       |
+| Salary      | float(8,2)  | YES  |     | NULL    |       |
+| Comm_pct    | float(4,2)  | YES  |     | NULL    |       |
+| Mgr_id      | int         | YES  |     | NULL    |       |
+| Department  | int         | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
+mysql> select * from Employee;
++-------------+-----------+----------+---------+----------+--------+------------+
+| Employee_id | Last_name | Job_id   | Salary  | Comm_pct | Mgr_id | Department |
++-------------+-----------+----------+---------+----------+--------+------------+
+|         198 | Connell   | SH_CLERK | 2600.00 |     2.50 |    124 |         50 |
+|         199 | Grant     | SH_CLERK | 2600.00 |     2.20 |    124 |         50 |
+|         200 | Whalen    | AD_ASST  | 4400.00 |     1.30 |    101 |         10 |
+|         201 | Hartstein | IT_PROG  | 6600.00 |     0.00 |    100 |         20 |
+|         202 | Fay       | AC_MGR   | 6500.00 |     0.00 |    210 |         20 |
+|         203 | Mavris    | AD_VP    | 7500.00 |     0.00 |    101 |         40 |
+|         204 | Baer      | AD_PRES  | 3500.00 |     1.50 |    101 |         90 |
+|         205 | Higgins   | AC_MGR   | 2300.00 |     0.00 |    101 |         60 |
+|         206 | Gitz      | IT_PROG  | 5000.00 |     0.00 |    103 |         60 |
+|         100 | King      | AD_ASST  | 8956.00 |     0.30 |    108 |        100 |
+|         101 | Kocher    | SH_CLERK | 3400.00 |     1.30 |    118 |         30 |
++-------------+-----------+----------+---------+----------+--------+------------+
+11 rows in set (0.00 sec)
+
+mysql> select Employee_id,last_name,job_id from employee;
++-------------+-----------+----------+
+| Employee_id | last_name | job_id   |
++-------------+-----------+----------+
+|         198 | Connell   | SH_CLERK |
+|         199 | Grant     | SH_CLERK |
+|         200 | Whalen    | AD_ASST  |
+|         201 | Hartstein | IT_PROG  |
+|         202 | Fay       | AC_MGR   |
+|         203 | Mavris    | AD_VP    |
+|         204 | Baer      | AD_PRES  |
+|         205 | Higgins   | AC_MGR   |
+|         206 | Gitz      | IT_PROG  |
+|         100 | King      | AD_ASST  |
+|         101 | Kocher    | SH_CLERK |
++-------------+-----------+----------+
+11 rows in set (0.00 sec)
+
+mysql> select * from employee where department=60;
++-------------+-----------+---------+---------+----------+--------+------------+
+| Employee_id | Last_name | Job_id  | Salary  | Comm_pct | Mgr_id | Department |
++-------------+-----------+---------+---------+----------+--------+------------+
+|         205 | Higgins   | AC_MGR  | 2300.00 |     0.00 |    101 |         60 |
+|         206 | Gitz      | IT_PROG | 5000.00 |     0.00 |    103 |         60 |
++-------------+-----------+---------+---------+----------+--------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select * from employee where last_name='King';
++-------------+-----------+---------+---------+----------+--------+------------+
+| Employee_id | Last_name | Job_id  | Salary  | Comm_pct | Mgr_id | Department |
++-------------+-----------+---------+---------+----------+--------+------------+
+|         100 | King      | AD_ASST | 8956.00 |     0.30 |    108 |        100 |
++-------------+-----------+---------+---------+----------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> select distinct(job_id) as 'JOB_TITLE' from employee;
++-----------+
+| JOB_TITLE |
++-----------+
+| SH_CLERK  |
+| AD_ASST   |
+| IT_PROG   |
+| AC_MGR    |
+| AD_VP     |
+| AD_PRES   |
++-----------+
+6 rows in set (0.00 sec)
+
+mysql> select * from employee where comm_pct='null';
++-------------+-----------+---------+---------+----------+--------+------------+
+| Employee_id | Last_name | Job_id  | Salary  | Comm_pct | Mgr_id | Department |
++-------------+-----------+---------+---------+----------+--------+------------+
+|         201 | Hartstein | IT_PROG | 6600.00 |     0.00 |    100 |         20 |
+|         202 | Fay       | AC_MGR  | 6500.00 |     0.00 |    210 |         20 |
+|         203 | Mavris    | AD_VP   | 7500.00 |     0.00 |    101 |         40 |
+|         205 | Higgins   | AC_MGR  | 2300.00 |     0.00 |    101 |         60 |
+|         206 | Gitz      | IT_PROG | 5000.00 |     0.00 |    103 |         60 |
++-------------+-----------+---------+---------+----------+--------+------------+
+5 rows in set, 1 warning (0.29 sec)
+
+mysql> select * from employee where comm_pct='null';
++-------------+-----------+---------+---------+----------+--------+------------+
+| Employee_id | Last_name | Job_id  | Salary  | Comm_pct | Mgr_id | Department |
++-------------+-----------+---------+---------+----------+--------+------------+
+|         201 | Hartstein | IT_PROG | 6600.00 |     0.00 |    100 |         20 |
+|         202 | Fay       | AC_MGR  | 6500.00 |     0.00 |    210 |         20 |
+|         203 | Mavris    | AD_VP   | 7500.00 |     0.00 |    101 |         40 |
+|         205 | Higgins   | AC_MGR  | 2300.00 |     0.00 |    101 |         60 |
+|         206 | Gitz      | IT_PROG | 5000.00 |     0.00 |    103 |         60 |
++-------------+-----------+---------+---------+----------+--------+------------+
+5 rows in set, 1 warning (0.00 sec)
+
+mysql> select employee_id,department,salary from employee where salary>5000;
++-------------+------------+---------+
+| employee_id | department | salary  |
++-------------+------------+---------+
+|         201 |         20 | 6600.00 |
+|         202 |         20 | 6500.00 |
+|         203 |         40 | 7500.00 |
+|         100 |        100 | 8956.00 |
++-------------+------------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select last_name,salary from employee where salary between 4000 and 7000;
++-----------+---------+
+| last_name | salary  |
++-----------+---------+
+| Whalen    | 4400.00 |
+| Hartstein | 6600.00 |
+| Fay       | 6500.00 |
+| Gitz      | 5000.00 |
++-----------+---------+
+4 rows in set (0.00 sec)
+
+mysql> select * from employee where salary in(6000,6500,7000);
++-------------+-----------+--------+---------+----------+--------+------------+
+| Employee_id | Last_name | Job_id | Salary  | Comm_pct | Mgr_id | Department |
++-------------+-----------+--------+---------+----------+--------+------------+
+|         202 | Fay       | AC_MGR | 6500.00 |     0.00 |    210 |         20 |
++-------------+-----------+--------+---------+----------+--------+------------+
+1 row in set (0.00 sec)
+
+mysql> select * from employee where department in(10,20,30,50);
++-------------+-----------+----------+---------+----------+--------+------------+
+| Employee_id | Last_name | Job_id   | Salary  | Comm_pct | Mgr_id | Department |
++-------------+-----------+----------+---------+----------+--------+------------+
+|         198 | Connell   | SH_CLERK | 2600.00 |     2.50 |    124 |         50 |
+|         199 | Grant     | SH_CLERK | 2600.00 |     2.20 |    124 |         50 |
+|         200 | Whalen    | AD_ASST  | 4400.00 |     1.30 |    101 |         10 |
+|         201 | Hartstein | IT_PROG  | 6600.00 |     0.00 |    100 |         20 |
+|         202 | Fay       | AC_MGR   | 6500.00 |     0.00 |    210 |         20 |
+|         101 | Kocher    | SH_CLERK | 3400.00 |     1.30 |    118 |         30 |
++-------------+-----------+----------+---------+----------+--------+------------+
+6 rows in set (0.00 sec)
+
+mysql> select * from employee where salary!=5000;
++-------------+-----------+----------+---------+----------+--------+------------+
+| Employee_id | Last_name | Job_id   | Salary  | Comm_pct | Mgr_id | Department |
++-------------+-----------+----------+---------+----------+--------+------------+
+|         198 | Connell   | SH_CLERK | 2600.00 |     2.50 |    124 |         50 |
+|         199 | Grant     | SH_CLERK | 2600.00 |     2.20 |    124 |         50 |
+|         200 | Whalen    | AD_ASST  | 4400.00 |     1.30 |    101 |         10 |
+|         201 | Hartstein | IT_PROG  | 6600.00 |     0.00 |    100 |         20 |
+|         202 | Fay       | AC_MGR   | 6500.00 |     0.00 |    210 |         20 |
+|         203 | Mavris    | AD_VP    | 7500.00 |     0.00 |    101 |         40 |
+|         204 | Baer      | AD_PRES  | 3500.00 |     1.50 |    101 |         90 |
+|         205 | Higgins   | AC_MGR   | 2300.00 |     0.00 |    101 |         60 |
+|         100 | King      | AD_ASST  | 8956.00 |     0.30 |    108 |        100 |
+|         101 | Kocher    | SH_CLERK | 3400.00 |     1.30 |    118 |         30 |
++-------------+-----------+----------+---------+----------+--------+------------+
+10 rows in set (0.00 sec)
+
+mysql> select * from employee where job_id='SH_CLERK';
++-------------+-----------+----------+---------+----------+--------+------------+
+| Employee_id | Last_name | Job_id   | Salary  | Comm_pct | Mgr_id | Department |
++-------------+-----------+----------+---------+----------+--------+------------+
+|         198 | Connell   | SH_CLERK | 2600.00 |     2.50 |    124 |         50 |
+|         199 | Grant     | SH_CLERK | 2600.00 |     2.20 |    124 |         50 |
+|         101 | Kocher    | SH_CLERK | 3400.00 |     1.30 |    118 |         30 |
++-------------+-----------+----------+---------+----------+--------+------------+
+3 rows in set (0.00 sec)
+
+mysql> update employee set job_id='Grade_A' where salary>5000;
+Query OK, 4 rows affected (0.06 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+
+mysql> select * from employee;
++-------------+-----------+----------+---------+----------+--------+------------+
+| Employee_id | Last_name | Job_id   | Salary  | Comm_pct | Mgr_id | Department |
++-------------+-----------+----------+---------+----------+--------+------------+
+|         198 | Connell   | SH_CLERK | 2600.00 |     2.50 |    124 |         50 |
+|         199 | Grant     | SH_CLERK | 2600.00 |     2.20 |    124 |         50 |
+|         200 | Whalen    | AD_ASST  | 4400.00 |     1.30 |    101 |         10 |
+|         201 | Hartstein | Grade_A  | 6600.00 |     0.00 |    100 |         20 |
+|         202 | Fay       | Grade_A  | 6500.00 |     0.00 |    210 |         20 |
+|         203 | Mavris    | Grade_A  | 7500.00 |     0.00 |    101 |         40 |
+|         204 | Baer      | AD_PRES  | 3500.00 |     1.50 |    101 |         90 |
+|         205 | Higgins   | AC_MGR   | 2300.00 |     0.00 |    101 |         60 |
+|         206 | Gitz      | IT_PROG  | 5000.00 |     0.00 |    103 |         60 |
+|         100 | King      | Grade_A  | 8956.00 |     0.30 |    108 |        100 |
+|         101 | Kocher    | SH_CLERK | 3400.00 |     1.30 |    118 |         30 |
++-------------+-----------+----------+---------+----------+--------+------------+
+11 rows in set (0.00 sec)
+
+mysql> select * from employee where job_id in('SH_CLERK','IT_PROG','AD_ASST');
++-------------+-----------+----------+---------+----------+--------+------------+
+| Employee_id | Last_name | Job_id   | Salary  | Comm_pct | Mgr_id | Department |
++-------------+-----------+----------+---------+----------+--------+------------+
+|         198 | Connell   | SH_CLERK | 2600.00 |     2.50 |    124 |         50 |
+|         199 | Grant     | SH_CLERK | 2600.00 |     2.20 |    124 |         50 |
+|         200 | Whalen    | AD_ASST  | 4400.00 |     1.30 |    101 |         10 |
+|         206 | Gitz      | IT_PROG  | 5000.00 |     0.00 |    103 |         60 |
+|         101 | Kocher    | SH_CLERK | 3400.00 |     1.30 |    118 |         30 |
++-------------+-----------+----------+---------+----------+--------+------------+
+5 rows in set (0.00 sec)
+
+mysql> select * from employee where job_id='SH_CLERK' and salary<3000;
++-------------+-----------+----------+---------+----------+--------+------------+
+| Employee_id | Last_name | Job_id   | Salary  | Comm_pct | Mgr_id | Department |
++-------------+-----------+----------+---------+----------+--------+------------+
+|         198 | Connell   | SH_CLERK | 2600.00 |     2.50 |    124 |         50 |
+|         199 | Grant     | SH_CLERK | 2600.00 |     2.20 |    124 |         50 |
++-------------+-----------+----------+---------+----------+--------+------------+
+2 rows in set (0.00 sec)
+
+mysql> select last_name,mgr_id from employee where salary>3000 and mgr_id=101;
++-----------+--------+
+| last_name | mgr_id |
++-----------+--------+
+| Whalen    |    101 |
+| Mavris    |    101 |
+| Baer      |    101 |
++-----------+--------+
+3 rows in set (0.00 sec)
