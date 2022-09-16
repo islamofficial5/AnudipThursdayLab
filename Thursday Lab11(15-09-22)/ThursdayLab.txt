@@ -29,6 +29,8 @@ mysql> select * from Employee;
 |         101 | Kocher    | SH_CLERK | 3400.00 |     1.30 |    118 |         30 |
 +-------------+-----------+----------+---------+----------+--------+------------+
 11 rows in set (0.00 sec)
+==========================
+3. Display last_name, job_id, employee_id for each employee with employee_id appearing first.
 
 mysql> select Employee_id,last_name,job_id from employee;
 +-------------+-----------+----------+
@@ -47,6 +49,8 @@ mysql> select Employee_id,last_name,job_id from employee;
 |         101 | Kocher    | SH_CLERK |
 +-------------+-----------+----------+
 11 rows in set (0.00 sec)
+==========================
+4. Display the details of all employees of department 60.
 
 mysql> select * from employee where department=60;
 +-------------+-----------+---------+---------+----------+--------+------------+
@@ -56,6 +60,8 @@ mysql> select * from employee where department=60;
 |         206 | Gitz      | IT_PROG | 5000.00 |     0.00 |    103 |         60 |
 +-------------+-----------+---------+---------+----------+--------+------------+
 2 rows in set (0.00 sec)
+========================
+5. Display the employee details of the employee who’s last_name is King.
 
 mysql> select * from employee where last_name='King';
 +-------------+-----------+---------+---------+----------+--------+------------+
@@ -64,6 +70,8 @@ mysql> select * from employee where last_name='King';
 |         100 | King      | AD_ASST | 8956.00 |     0.30 |    108 |        100 |
 +-------------+-----------+---------+---------+----------+--------+------------+
 1 row in set (0.00 sec)
+=======================
+6. Display unique job_id from EMPLOYEE table. Give alias name to the column as JOB_TITLE. 
 
 mysql> select distinct(job_id) as 'JOB_TITLE' from employee;
 +-----------+
@@ -77,6 +85,8 @@ mysql> select distinct(job_id) as 'JOB_TITLE' from employee;
 | AD_PRES   |
 +-----------+
 6 rows in set (0.00 sec)
+=========================
+9. Display the details of those employees who get commission. 
 
 mysql> select * from employee where comm_pct='null';
 +-------------+-----------+---------+---------+----------+--------+------------+
@@ -89,6 +99,8 @@ mysql> select * from employee where comm_pct='null';
 |         206 | Gitz      | IT_PROG | 5000.00 |     0.00 |    103 |         60 |
 +-------------+-----------+---------+---------+----------+--------+------------+
 5 rows in set, 1 warning (0.29 sec)
+====================================
+10.Display the details of those employees who do not get commission. 
 
 mysql> select * from employee where comm_pct='null';
 +-------------+-----------+---------+---------+----------+--------+------------+
@@ -101,6 +113,8 @@ mysql> select * from employee where comm_pct='null';
 |         206 | Gitz      | IT_PROG | 5000.00 |     0.00 |    103 |         60 |
 +-------------+-----------+---------+---------+----------+--------+------------+
 5 rows in set, 1 warning (0.00 sec)
+====================================
+11.Display the Employee_id, Department_id and Salary all employees whose salary is greater than 5000. 
 
 mysql> select employee_id,department,salary from employee where salary>5000;
 +-------------+------------+---------+
@@ -112,6 +126,8 @@ mysql> select employee_id,department,salary from employee where salary>5000;
 |         100 |        100 | 8956.00 |
 +-------------+------------+---------+
 4 rows in set (0.00 sec)
+========================
+12.Display the Last_Name and Salary of all employees whose salary is between 4000 and 7000. 
 
 mysql> select last_name,salary from employee where salary between 4000 and 7000;
 +-----------+---------+
@@ -123,6 +139,8 @@ mysql> select last_name,salary from employee where salary between 4000 and 7000;
 | Gitz      | 5000.00 |
 +-----------+---------+
 4 rows in set (0.00 sec)
+========================
+13.Display the details of all employees whose salary is either 6000 or 6500 or 7000. 
 
 mysql> select * from employee where salary in(6000,6500,7000);
 +-------------+-----------+--------+---------+----------+--------+------------+
@@ -131,6 +149,9 @@ mysql> select * from employee where salary in(6000,6500,7000);
 |         202 | Fay       | AC_MGR | 6500.00 |     0.00 |    210 |         20 |
 +-------------+-----------+--------+---------+----------+--------+------------+
 1 row in set (0.00 sec)
+========================
+14.Display the details of all those employees who work either in department 10 or 20
+or 30 or 50.
 
 mysql> select * from employee where department in(10,20,30,50);
 +-------------+-----------+----------+---------+----------+--------+------------+
@@ -144,6 +165,8 @@ mysql> select * from employee where department in(10,20,30,50);
 |         101 | Kocher    | SH_CLERK | 3400.00 |     1.30 |    118 |         30 |
 +-------------+-----------+----------+---------+----------+--------+------------+
 6 rows in set (0.00 sec)
+========================
+15.Display the details of all employees whose salary is not equal to 5000. 
 
 mysql> select * from employee where salary!=5000;
 +-------------+-----------+----------+---------+----------+--------+------------+
@@ -161,6 +184,8 @@ mysql> select * from employee where salary!=5000;
 |         101 | Kocher    | SH_CLERK | 3400.00 |     1.30 |    118 |         30 |
 +-------------+-----------+----------+---------+----------+--------+------------+
 10 rows in set (0.00 sec)
+=========================
+16.Display the details of all the CLERKS working in the organization. 
 
 mysql> select * from employee where job_id='SH_CLERK';
 +-------------+-----------+----------+---------+----------+--------+------------+
@@ -171,6 +196,9 @@ mysql> select * from employee where job_id='SH_CLERK';
 |         101 | Kocher    | SH_CLERK | 3400.00 |     1.30 |    118 |         30 |
 +-------------+-----------+----------+---------+----------+--------+------------+
 3 rows in set (0.00 sec)
+========================
+17.Update the job_id’s of the employees who earn more than 5000 to Grade_A. 
+Display the table EMPLOYEE after updating. 
 
 mysql> update employee set job_id='Grade_A' where salary>5000;
 Query OK, 4 rows affected (0.06 sec)
@@ -193,6 +221,8 @@ mysql> select * from employee;
 |         101 | Kocher    | SH_CLERK | 3400.00 |     1.30 |    118 |         30 |
 +-------------+-----------+----------+---------+----------+--------+------------+
 11 rows in set (0.00 sec)
+=========================
+18.Display the details of all those employees who are either CLERK or PROGRAMMER or ASSISTANT. 
 
 mysql> select * from employee where job_id in('SH_CLERK','IT_PROG','AD_ASST');
 +-------------+-----------+----------+---------+----------+--------+------------+
@@ -205,6 +235,8 @@ mysql> select * from employee where job_id in('SH_CLERK','IT_PROG','AD_ASST');
 |         101 | Kocher    | SH_CLERK | 3400.00 |     1.30 |    118 |         30 |
 +-------------+-----------+----------+---------+----------+--------+------------+
 5 rows in set (0.00 sec)
+=========================
+19.Display those employees from the EMPLOYEE table whose designation is CLERK and salary is less than 3000. 
 
 mysql> select * from employee where job_id='SH_CLERK' and salary<3000;
 +-------------+-----------+----------+---------+----------+--------+------------+
@@ -214,6 +246,9 @@ mysql> select * from employee where job_id='SH_CLERK' and salary<3000;
 |         199 | Grant     | SH_CLERK | 2600.00 |     2.20 |    124 |         50 |
 +-------------+-----------+----------+---------+----------+--------+------------+
 2 rows in set (0.00 sec)
+========================
+
+20.Display those employees Last_Name, Mgr_id from the EMPLOYEE table whose salary is above 3000 and work under Manager 101
 
 mysql> select last_name,mgr_id from employee where salary>3000 and mgr_id=101;
 +-----------+--------+
