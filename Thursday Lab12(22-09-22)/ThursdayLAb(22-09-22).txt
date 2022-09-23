@@ -1,0 +1,89 @@
+1.Create table
+mysql> create table students(registration_number int primary key, name varchar(50) not null, branch varchar(25) not null, contact int(12),DOB varchar(25) not null, Date_of_joinig varchar(25) not null, Address varchar(50) not null, Email_Id varchar(50) not null);
+Query OK, 0 rows affected, 1 warning (0.18 sec)
+
+mysql> desc students;
++---------------------+-------------+------+-----+---------+-------+
+| Field               | Type        | Null | Key | Default | Extra |
++---------------------+-------------+------+-----+---------+-------+
+| registration_number | int         | NO   | PRI | NULL    |       |
+| name                | varchar(50) | NO   |     | NULL    |       |
+| branch              | varchar(25) | NO   |     | NULL    |       |
+| contact             | int         | YES  |     | NULL    |       |
+| DOB                 | varchar(25) | NO   |     | NULL    |       |
+| Date_of_joinig      | varchar(25) | NO   |     | NULL    |       |
+| Address             | varchar(50) | NO   |     | NULL    |       |
+| Email_Id            | varchar(50) | NO   |     | NULL    |       |
++---------------------+-------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
+
+2.Insert values from the table.
+mysql> insert into students values(101,'Islam','CSE',620562,'12-06-1998','01-08-2017','Dhanbad','is@gmail.com');
+Query OK, 1 row affected (0.09 sec)
+
+mysql> insert into students values(102,'Suraj','CSE',6205622,'02-08-1998','01-08-2018','Dhanbad','su@gmail.com');
+Query OK, 1 row affected (0.16 sec)
+
+mysql> select * from students;
++---------------------+-------+--------+---------+------------+----------------+---------+--------------+
+| registration_number | name  | branch | contact | DOB        | Date_of_joinig | Address | Email_Id     |
++---------------------+-------+--------+---------+------------+----------------+---------+--------------+
+|                 101 | Islam | CSE    |  620562 | 12-06-1998 | 01-08-2017     | Dhanbad | is@gmail.com |
+|                 102 | Suraj | CSE    | 6205622 | 02-08-1998 | 01-08-2018     | Dhanbad | su@gmail.com |
++---------------------+-------+--------+---------+------------+----------------+---------+--------------+
+2 rows in set (0.00 sec)
+
+3.Create subject table.
+mysql> create table subjects(clg_name varchar(50),sub1 int(10),sub2 int(10),sub3 int(10),reg_id int, foreign key(reg_id) references students(registration_number));
+Query OK, 0 rows affected, 3 warnings (0.67 sec)
+
+mysql> desc subjects;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| clg_name | varchar(50) | YES  |     | NULL    |       |
+| sub1     | int         | YES  |     | NULL    |       |
+| sub2     | int         | YES  |     | NULL    |       |
+| sub3     | int         | YES  |     | NULL    |       |
+| reg_id   | int         | YES  | MUL | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+5 rows in set (0.01 sec)
+
+4.Insert the values into the sujects.
+mysql> insert into subjects values('BIT',76,56,98,101);
+Query OK, 1 row affected (0.10 sec)
+
+mysql> insert into subjects values('LPU',76,76,78,102);
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select * from subjects;
++----------+------+------+------+--------+
+| clg_name | sub1 | sub2 | sub3 | reg_id |
++----------+------+------+------+--------+
+| BIT      |   76 |   56 |   98 |    101 |
+| LPU      |   76 |   76 |   78 |    102 |
++----------+------+------+------+--------+
+2 rows in set (0.00 sec)
+
+5. showing details of student name,branch,address,clg with  total marks 
+
+mysql> select s.name,s.branch,s.address,c.clg_name,(sub1+sub2+sub3) as 'total marks' from students s inner join subjects c on s.registration_number=c.reg_id;
++-------+--------+---------+----------+-------------+
+| name  | branch | address | clg_name | total marks |
++-------+--------+---------+----------+-------------+
+| Islam | CSE    | Dhanbad | BIT      |         230 |
+| Suraj | CSE    | Dhanbad | LPU      |         230 |
++-------+--------+---------+----------+-------------+
+2 rows in set (0.08 sec)
+
+6.showing details of student name,branch,address,clg with  total marks with avg marks
+Syntax:-
+
+mysql> select s.name,s.branch,s.address,c.clg_name,((sub1+sub2+sub3)/3) as 'avg marks' from students s inner join subjects c on s.registration_number=c.reg_id;
++-------+--------+---------+----------+-----------+
+| name  | branch | address | clg_name | avg marks |
++-------+--------+---------+----------+-----------+
+| Islam | CSE    | Dhanbad | BIT      |   76.6667 |
+| Suraj | CSE    | Dhanbad | LPU      |   76.6667 |
++-------+--------+---------+----------+-----------+
+2 rows in set (0.04 sec)
